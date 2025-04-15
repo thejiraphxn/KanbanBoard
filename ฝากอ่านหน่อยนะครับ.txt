@@ -1,0 +1,74 @@
+หากพบว่าระบบทำงานช้าลงเนื่องจากการเชื่อมต่อ WebSocket แนะนำให้ลองปิดฟังก์ชันที่เรียกใช้ WSAPI (ฝั่ง Frontend) ชั่วคราวดูก่อนก็ได้ครับ
+
+ผลกระทบที่อาจเกิดขึ้นหลังจากปิด WebSocket:
+
+- ระบบแจ้งเตือนเมื่อมีการเชิญจะไม่ทำงานแบบเรียลไทม์ (แต่ยังสามารถกดเข้าไปดูหน้า Notification ได้ตามปกติ)
+- ระบบ Jam จะไม่อัปเดตแบบเรียลไทม์ระหว่างผู้ใช้ (เช่น การย้ายบล็อกในหน้าจอของผู้อื่นจะไม่แสดงผลทันที) แต่ยัง Jam ได้
+- อย่างไรก็ตาม ระบบในส่วนของ CRUD (เช่น การสร้าง, ลบ, และแก้ไขรายการ) ยังคงทำงานได้ตามปกติ
+- เนื่องจากมีเวลา 3 วัน โค้ดเลยอาจดูไม่เป็นระเบียบนะครับ และเครื่องมือบางตัวยังใหม่สำหรับผม เช่น Drag and Drop และ WebSocket Protocol
+
+Fullstack Project - Flask + Next.js + WebSocket
+
+Backend (Flask + Flask-SocketIO)
+
+Core Framework
+- Flask — Web framework for creating APIs
+- flask_cors — Handle CORS so frontend can access API across origins
+
+Database
+- pymysql — MySQL/MariaDB connection
+- connection.get_con — Custom database connector function
+
+Authentication / Security
+- bcrypt — Hash passwords securely
+- jwt — Handle token-based auth
+- re — For input pattern validation (email, password, etc.)
+
+ID Generation
+- uuid, shortuuid — Generate unique user IDs or tag IDs
+
+Time & Date
+- datetime, pytz — Timezone and timestamp management (e.g., Asia/Bangkok)
+
+WebSocket
+- flask_socketio — Enable real-time features (emit, on, join_room)
+- eventlet — Async engine that allows many clients non-blocking I/O
+- eventlet.monkey_patch() — Patches Python stdlib to work with eventlet
+
+Frontend (Next.js + React)
+
+Core Framework
+- next 15.3.0 — React Framework with SSR/CSR
+- react, react-dom ^19.0.0 — Core React
+
+Authentication
+- next-auth — Complete Auth system (Google, Credentials, JWT)
+
+UI Components
+- @mui/material, @mui/icons-material — Material UI components and icons
+- @mui/joy — Joy UI (modern MUI style)
+- @emotion/react, @emotion/styled — Styling and theming for MUI
+
+Utilities
+- lodash — Handy utilities like debounce, cloneDeep
+- moment — Date/time handling (consider dayjs later)
+
+WebSocket
+- socket.io-client — Client-side WebSocket for real-time sync with backend
+
+Drag and Drop
+- @dnd-kit/core — For Kanban or draggable components
+
+Alerts
+- sweetalert2 — Beautiful popup alerts
+
+Animation
+- framer-motion — Animate components smoothly
+
+Communication Flow
+- REST API with JWT for authentication
+- WebSocket (via socket.io) for real-time updates like board/task notifications
+
+Summary
+- Backend = Flask + JWT + PyMySQL + Flask-SocketIO + Eventlet
+- Frontend = Next.js + React 19 + MUI + DnD + SweetAlert + WebSocket

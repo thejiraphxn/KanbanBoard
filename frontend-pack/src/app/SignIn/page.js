@@ -109,7 +109,7 @@ const Page = () => {
             disabled={disableButton}
             className="w-full py-3 text-sm font-medium cursor-pointer ease-in-out suration-200 rounded-xl bg-green-700 text-white hover:bg-green-800 disabled:opacity-50"
           >
-            SignIn
+            Sign in
           </button>
         </form>
       </main>

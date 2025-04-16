@@ -60,7 +60,7 @@ const Page = () => {
                 await Swal.fire({
                     icon: 'success',
                     title: 'Registration success!',
-                    text: result.message || 'You can login now !',
+                    text: result.message || 'You can sign in now !',
                     confirmButtonColor: '#22c55e'
                 })
                 setFormData({
@@ -207,7 +207,7 @@ const Page = () => {
                 // disabled={disableButton}
                 className="w-full py-3 text-sm font-medium rounded-xl bg-green-700 text-white hover:bg-green-800 duration-200 ease-in-out cursor-pointer disabled:opacity-50"
             >
-                SignUp
+                Sign up
             </button>
             </form>
         </main>

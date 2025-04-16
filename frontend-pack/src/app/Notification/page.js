@@ -46,7 +46,7 @@ const page = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-green-200 via-green-100 to-green-200 h-full max-h-full w-screen items-center">
+      <div className="bg-gradient-to-br from-green-200 via-green-50 to-green-100 h-full max-h-full w-screen items-center">
           <NavBar/>
             <div className="flex items-center justify-center min-h-screen">
               <div className="bg-white rounded-2xl p-6 w-full max-w-2xl">

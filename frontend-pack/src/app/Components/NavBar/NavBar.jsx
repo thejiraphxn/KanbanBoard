@@ -125,7 +125,7 @@ function NavBar() {
                                         </li>
                                         <li className='w-1/4 justify-items-center'>
                                             <Link className="flex inline-block text-green-700 no-underline hover:text-green-300 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out" href="/SignIn">
-                                                <ExitToAppIcon/> {'Login'}
+                                                <ExitToAppIcon/> {'Sign In'}
                                             </Link> 
                                         </li>
                                         
@@ -160,7 +160,7 @@ function NavBar() {
                                         </li>
                                         <li className='w-1/4 justify-items-center'>
                                             <Link className="flex inline-block text-green-700 no-underline hover:text-green-300 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out" href="/SignOut">
-                                                <LogoutIcon/> {'Logout'}
+                                                <LogoutIcon/> {'Sign Out'}
                                             </Link> 
                                         </li>
                                     </>

@@ -13,33 +13,49 @@ const History = () => {
 
 
     const DeleteBoard = async(BoardID) => {
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/board/delboard/${BoardID}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${session?.user?.token}`
-                },
-            })
-            const data = await res.json();
-            console.log(data)
-            if (res.ok && data.status) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Deleted your board !',
-                })
-                fetchLists()
-                fetchInviteLists()
-            } 
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Something went wrong!',
-            })
-            console.error('Error fetching tags :', error.message)
-        }
+        Swal.fire({
+            title: 'Would you like delete this board ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#22c55e',
+            cancelButtonColor: '#ef4444',
+            confirmButtonText: 'You, I would'
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                try {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/board/delboard/${BoardID}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${session?.user?.token}`
+                        },
+                    })
+                    const data = await res.json();
+                    console.log(data)
+                    if (res.ok && data.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Deleted your board !',
+                        })
+                        fetchLists()
+                        fetchInviteLists()
+                    } 
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong!',
+                    })
+                    console.error('Error fetching tags :', error.message)
+                }
+                Swal.fire(
+                    'Success',
+                    `You deleted room id : '${BoardID}`,
+                    'success'
+                )
+            }
+        })
     }
 
     const fetchLists = async () => {
@@ -98,14 +114,22 @@ const History = () => {
                 <div className="gap-3 grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 mb-5">
                     {
                         Lists?.map((list, index) => (
-                            <Link href={`/Mission/Master/${list?.bd_id}`} key={index} className="bg-green-100 p-3 rounded-xl cursor-pointer hover:bg-green-200 transition duration-300 ease-in-out grid grid-cols-2">
-                                <h2 className="text-lg text-green-700 flex items-center">
-                                    <div className="me-3">
+                            <Link href={`/Mission/Master/${list?.bd_id}`} key={index} className="bg-green-100 p-3 rounded-xl cursor-pointer hover:bg-green-200 transition duration-300 ease-in-out flex justify-between items-center">
+                                <div className="flex items-center space-x-2 w-2/3">
+                                    <div className="text-green-700">
                                         <ListAltIcon />
                                     </div>
-                                    {ShortText(list?.bd_project_name, 19)}
-                                </h2>
-                                <h2 className='text-lg text-green-700 flex justify-self-end me-2' onClick={() => DeleteBoard(list?.bd_id)}>
+                                    <h2 className="text-md text-green-700 truncate">
+                                        {ShortText(list?.bd_project_name, 15)}
+                                    </h2>
+                                </div>
+                                <h2
+                                    className="text-md text-green-700 me-2 hover:text-green-900"
+                                    onClick={(e) => {
+                                        e.preventDefault(); 
+                                        DeleteBoard(list?.bd_id);
+                                    }}
+                                >
                                     x
                                 </h2>
                             </Link>
@@ -120,7 +144,7 @@ const History = () => {
                     {
                         InviteLists?.map((list, index) => (
                             <Link href={`/Mission/Guest/${list?.bd_id}`} key={index} className="bg-green-100 p-3 rounded-xl cursor-pointer hover:bg-green-200 transition duration-300 ease-in-out">
-                                <h2 className="text-lg text-green-700 flex items-center">
+                                <h2 className="text-md text-green-700 flex items-center">
                                     <div className="me-3">
                                         <ListAltIcon />
                                     </div>

@@ -218,7 +218,7 @@ def signin():
 
             return jsonify({
                 "status": True,
-                "message": "Login successful.",
+                "message": "Sign in successful.",
                 "token": token,
                 "user": {
                     "mb_id": user["mb_id"],
@@ -230,7 +230,7 @@ def signin():
             }), 200
 
     except Exception as e:
-        print("Login error:", str(e))
+        print("Sign in error:", str(e))
         return jsonify({
             "status": False,
             "message": "Server error",
